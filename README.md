@@ -1,7 +1,7 @@
 
-# 🍽️ MealMate - Food Subscription Platform
+# 🍽️ MealMate - Meal Subscription Platform
 
-MealMate is an innovative meal subscription application designed to simplify how individuals and families access healthy, delicious meals.
+MealMate is an innovative meal subscription platform designed to simplify how individuals and families access healthy, delicious meals.
 
 ### ⭐ Features
 
