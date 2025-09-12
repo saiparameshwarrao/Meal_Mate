@@ -4,21 +4,6 @@
 
 ---
 
-## 📚 Table of Contents
-
-- [Introduction](#introduction)  
-- [Purpose](#purpose)  
-- [Key Features](#key-features)  
-- [Technologies Used](#technologies-used)  
-- [Backend Overview](#backend-overview)  
-- [Getting Started](#getting-started)  
-- [API Endpoints](#api-endpoints)  
-- [Admin Panel](#admin-panel)  
-- [Contributing](#contributing)  
-- [License](#license)  
-
----
-
 ## 🍴 Introduction
 
 MealMate makes meal planning and ordering super easy 🎯 — tailored to your dietary needs and lifestyle so you can eat healthy without the stress!
