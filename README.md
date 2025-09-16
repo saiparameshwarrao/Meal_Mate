@@ -65,18 +65,50 @@ To provide a seamless meal planning experience catering to vegetarian, vegan, gl
 
 ---
 
-## 🚀 Getting Started
 
-### 📋 Prerequisites
 
-- Node.js  
-- MongoDB  
-- npm or yarn  
+## 📂 Project Structure
+```text
+Meal_Mate/
+├── backend/          
+│   ├── server.js     
+│   ├── models/       
+│   ├── routes/       
+│
+├── frontend/         
+│   ├── src/         
+│   ├── public/
+│   └── package.json
+│
+└── README.md
+```
+---
 
-### 🔧 Installation
+## 🛠️ Installation & Setup
+1. Clone the repo
+```text
+git clone https://github.com/saiparameshwarrao/Meal_Mate.git
+cd Meal_Mate
+```
 
-```bash
-git clone https://github.com/yourusername/mealmate.git
-cd mealmate
+2. Setup Backend (Express + MongoDB)
+```text
+cd backend
 npm install
+npm start
+```
+3. Setup Frontend (React)
+```text
+cd frontend
+npm install
+npm start
+```
+
+4. MongoDB Connection
+Create a .env file inside backend/
+```text
+MONGO_URI=mongodb://localhost:27017/mealmate
+PORT=5000
+```
+---
 
