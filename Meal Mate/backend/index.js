@@ -16,7 +16,9 @@ import jwt from 'jsonwebtoken';
 dotenv.config();
 
 // Ensure mongodbURL and PORT are loaded from the .env file
-const { mongodbURL, PORT, JWT_SECRET } = process.env;
+const { mongodbURL, JWT_SECRET, FRONTEND_URL, ADMIN_EMAIL, ADMIN_PASSWORD, COOKIE_SECRET } = process.env;
+const PORT = process.env.PORT || 5000;
+
 
 const app = express();
 
@@ -44,13 +46,25 @@ const adminJS = new AdminJS({
 });
 
 // Build and use AdminJS router
-const adminRouter = AdminJSExpress.buildRouter(adminJS);
-app.use(adminJS.options.rootPath, adminRouter);
+const adminRouter = AdminJSExpress.buildAuthenticatedRouter(
+  adminJS,
+  {
+    authenticate: async (email, password) => {
+      if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
+        return { email };
+      }
+      return null;
+    },
+    cookieName: 'adminjs',
+    cookiePassword: COOKIE_SECRET,
+  },
+  null,
+  { resave: false, saveUninitialized: false, secret: COOKIE_SECRET }
+);app.use(adminJS.options.rootPath, adminRouter);
 
 // Middleware
 app.use(cors({
-  origin: 'http://localhost:5173', // Frontend URL
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+origin: [FRONTEND_URL, 'http://localhost:5173'].filter(Boolean),  methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 app.use(express.json());
