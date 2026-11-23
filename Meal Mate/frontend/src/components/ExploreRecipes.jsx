@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import './ExploreRecipes.css';
 import { useNavigate } from 'react-router-dom';
+import { API } from '../config';
 
 const ExploreRecipes = () => {
   const [foodOptions, setFoodOptions] = useState([]);
@@ -20,7 +21,7 @@ const ExploreRecipes = () => {
   useEffect(() => {
     const fetchFoodData = async () => {
       try {
-        const response = await fetch('http://localhost:5555/api/food-options');
+        const response = await fetch(`${API}/api/food-options`);
         const data = await response.json();
         setFoodOptions(data);
       } catch (error) {

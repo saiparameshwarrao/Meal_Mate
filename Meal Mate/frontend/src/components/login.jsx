@@ -5,6 +5,7 @@ import { useNavigate, Link } from "react-router-dom";
 import axios from 'axios';
 import './userInfo.css';
 import { UserContext } from "../context/UserContext";
+import { API } from "../config";
 
 
 function Login() {
@@ -21,12 +22,12 @@ function Login() {
     
 
     try {
-      const response = await axios.post('http://localhost:5555/api/login', {
+      const response = await axios.post(`${API}/api/login`, {
         email,
         password,
       });
-      
-      const { token, username, address, userId } = response.data; // ✅ fix destructuring
+
+      const { token, username, address, userId } = response.data;
       
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify({ userId })); // ✅ fix here

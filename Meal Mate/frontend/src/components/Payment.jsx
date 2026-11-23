@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./Payment.css";
 import jsPDF from "jspdf";
 import QRCode from "react-qr-code";
+import { API } from "../config";
 
 const Payment = () => {
   const cart = JSON.parse(localStorage.getItem("cart")) || [
@@ -28,13 +29,34 @@ const Payment = () => {
     doc.save("invoice.pdf");
   };
 
-  const handlePlaceOrder = () => {
-    alert("Order placed successfully!");
-    // You can also redirect or clear cart here
-    const clearCart = () => {
-        setCart([]);
-        setItemQuantities({});
-      };
+  const handlePlaceOrder = async () => {
+    const stored = JSON.parse(localStorage.getItem("user") || "{}");
+    const userId = stored.userId;
+
+    if (!userId) {
+      alert("Please log in before placing an order.");
+      return;
+    }
+
+    try {
+      const response = await fetch(`${API}/api/place-order`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          userId,
+          items: cart.map(({ name, price, quantity }) => ({ name, price, quantity })),
+          totalAmount: getTotal(),
+        }),
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.message || "Failed to place order");
+      }
+      alert("Order placed successfully!");
+      localStorage.removeItem("cart");
+    } catch (error) {
+      alert(error.message || "Failed to place order");
+    }
   };
 
   return (
